@@ -1,0 +1,28 @@
+# Organizar os dados dos 5 grupos
+# Grupo A: Ensino Fundamental
+grupo_A <- c(0.732, 0.7768, 0.345, 0.92, 0.3656, 0.42)
+
+# Grupo B: Ensino Médio
+grupo_B <- c(74.9, 0.6, 0.653, 0.91)
+
+# Grupo C: Ensino Superior
+grupo_C <- c(0.75, 0.577, 0.81)
+
+# Grupo D: Vários Contextos
+grupo_D <- c(0.8, 0.08, 0.91, 0.812, 0.835)
+
+# Grupo E: Não Especificado
+grupo_E <- c(0.91, 0.93, 0.786, 0.79, 0.98, 0.95, 0.95)
+
+# Juntar todos os dados em um único vetor
+dados <- list(A = grupo_A, B = grupo_B, C = grupo_C, D = 
+grupo_D, E = grupo_E)
+
+# Criar um vetor com os rótulos dos grupos
+grupos <- rep(c("A", "B", "C", "D", "E"), sapply(dados, length))
+
+# Realizar o teste Tukey HSD
+tukey_result <- TukeyHSD(aov(unlist(dados) ~ grupos))
+
+# Visualizar o resumo dos resultados do teste Tukey HSD
+print(tukey_result)
