@@ -1,0 +1,19 @@
+# Definir os dados corretos para cada grupo
+grupo_a <- c(0.8, 0.7768)
+grupo_b <- c(0.749, 0.91, 0.93, 0.60, 0.91, 0.577, 0.92, 0.81,
+0.98, 0.835, 0.95)
+grupo_c <- c(0.08, 0.732, 0.75, 0.786, 0.812, 0.3656, 0.42, 0.91,
+0.95, 0.653, 0.345, 0.79)
+
+# Juntar todos os dados em um único vetor
+dados <- c(grupo_a, grupo_b, grupo_c)
+
+# Criar vetor de grupos para identificar a qual grupo cada dado pertence
+grupos <- c(rep("A", length(grupo_a)), rep("B", length(grupo_b)), 
+rep("C", length(grupo_c)))
+
+# Realizar a ANOVA
+resultado_anova <- aov(dados ~ grupos)
+
+# Sumarizar os resultados
+summary(resultado_anova)
