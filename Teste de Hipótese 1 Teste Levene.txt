@@ -1,0 +1,23 @@
+# Definir os dados corretos para cada grupo
+grupo_a <- c(0.8, 0.7768)
+grupo_b <- c(0.749, 0.91, 0.93, 0.60, 0.91, 0.577, 0.92, 0.81, 
+0.98, 0.835, 0.95)
+grupo_c <- c(0.08, 0.732, 0.75, 0.786, 0.812, 0.3656, 0.42, 0.91, 
+0.95, 0.653, 0.345, 0.79)
+
+# Determinar o comprimento mínimo entre os grupos
+comprimento_minimo <- min(length(grupo_a), length(grupo_b),
+length(grupo_c))
+
+# Ajustar os grupos para ter o mesmo comprimento
+grupo_a <- grupo_a[1:comprimento_minimo]
+grupo_b <- grupo_b[1:comprimento_minimo]
+grupo_c <- grupo_c[1:comprimento_minimo]
+
+# Realizar o teste de Levene
+library(car)
+resultado_levene <- car::leveneTest(c(grupo_a, grupo_b, grupo_c),
+group = rep(c("A", "B", "C"), each = comprimento_minimo))
+
+# Exibir o resultado no console
+print(resultado_levene)
