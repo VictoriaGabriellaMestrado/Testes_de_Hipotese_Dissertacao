@@ -13,3 +13,6 @@ O arquivo descreve a aplicação do teste de Levene para avaliar a igualdade de 
 # Teste de Hipótese 2 ANOVA
 O arquivo descreve o uso do teste de ANOVA (Análise de Variância) para comparar diferentes grupos educacionais, incluindo Ensino Fundamental, Médio, Superior, Vários Contextos e Não Especificado. Este teste é aplicado para investigar se há diferenças estatisticamente significativas entre as médias desses grupos.
 
+# Teste de Hipótese 2 Teste de Tukey
+O arquivo descreve a aplicação do teste de Tukey para comparar cinco grupos educacionais distintos, incluindo Ensino Fundamental, Ensino Médio, Ensino Superior, Vários Contextos e Não Especificado.
+
