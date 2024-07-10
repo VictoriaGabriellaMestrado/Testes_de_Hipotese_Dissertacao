@@ -1,0 +1,15 @@
+# Realizar o teste de Tukey
+library("agricolae")
+
+# Criar um data frame com os dados
+dados <- data.frame(
+  Valor = c(grupo_a, grupo_b, grupo_c),
+  Grupo = factor(rep(c("A", "B", "C"), c(length(grupo_a),
+  length(grupo_b), length(grupo_c))))
+)
+
+# Realizar o teste de Tukey
+tukey_result <- TukeyHSD(aov(Valor ~ Grupo, data = dados))
+
+# Mostrar os resultados
+print(tukey_result)
