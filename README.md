@@ -1,6 +1,9 @@
 # Testes_de_Hipotese_Dissertacao
 Este repositório apresenta códigos em R desenvolvidos para os testes de hipótese explorados na minha dissertação de mestrado. Inclui scripts detalhados e exemplos de análise estatística utilizados para investigar hipóteses específicas relacionadas ao meu estudo acadêmico.
 
+# Comparação de Desempenho entre Grupos de Estudos
+O arquivo descreve a comparação de desempenho entre grupos para ver qual é mais eficaz.
+
 # Teste de Hipótese 1 ANOVA
 O arquivo descreve o uso do teste de ANOVA (Análise de Variância) para comparar as médias de três grupos distintos: Grupo A, Grupo B e Grupo C. Este teste é utilizado para determinar se há diferenças estatisticamente significativas entre as médias dos grupos mencionados.
 
