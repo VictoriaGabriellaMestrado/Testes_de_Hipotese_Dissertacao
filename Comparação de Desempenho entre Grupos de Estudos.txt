@@ -1,0 +1,62 @@
+Passo 1: Preparar os Dados
+
+# Carregar pacotes necessários
+library(ggplot2)
+
+# Dados de exemplo
+dados <- data.frame(
+  Grupo = c(rep("Grupo A", 2), rep("Grupo B", 11), rep("Grupo C", 12)),
+  Estudo = c("Lindgren, Robb, et al. (2022)", "Yang, Chuanzhi, et al. (2021)",
+             "Vachev, Kristiyan, et al. (2021)", "Hu, Meijia, et al. (2022)", "Ikram, Sana, et al. (2023)", 
+             "Huang, Huiyan, et al. (2021)", "Kunhoth, Jayakanth, et al. (2023)", "Bian, Cunling, et al. (2019)",
+             "Rosli, Mohamed Syazwan Asyraf Bin, et al. (2021)", "Xiao, Yunkai, et al. (2022)", 
+             "Lu, Xiaofeng (2022)", "Alqahtani, Norah Dhafer, Bander Alzahrani, et al. (2023)", 
+             "Sharmila, C., et al. (2023)", "Ding, Mucong, et al (2019)", "Kahawanugoda, Adithya, et al. (2022)", 
+             "Swamy, Vinitra, et al. (2022)", "Delaney, Victoria, et al. (2021)", "Jensen, Emily, et al. (2021)",
+             "Fan, Ruchao, et al. (2022)", "Teran-Quezada, Alvaro, et al. (2022)", "Mor, Nuriel Shalom, et al. (2021)", 
+             "Perseghin, Erica, et al. (2023)", "Bassok, Miriam, el al . (1989)", "Ordóñez, Claudia Lucía, et al. (2002)",
+             "Lehrer, Richard, et al. (1993)"),
+  Media = c(0.8, 0.7768, 74.9, 0.91, 0.93, 0.60, 0.91, 0.577, 0.92, 0.81, 0.98, 0.835, 0.95, 0.08, 0.732, 
+            0.75, 0.786, 0.812, 0.3656, 0.42, 0.91, 0.95, 0.653, 0.345, 0.79),
+  DP = c(0.05, 0.007, 15.945, 0.028, 0, 0.008, 0.034, 0.158, 0.033, 0.061, 0.007, 0.085, 0.029, 0, 0.237, 
+         0, 0.004, 0.029, 0.265, 0.326, 0.019, 0, 0.189, 0.105, 0.151),
+  N = c(80, 210488, 35, 4550, 3000, 10000, 45, 82, 138500, 7418, 60, 30, 3000, 52562, 1450, 145714, 2000, 
+        16977, 549, 195, 50, 1800, 164, 88, 47)
+)
+
+
+Passo 2: Calcular Intervalos de Confiança
+
+# Função para calcular intervalo de confiança
+calc_ic <- function(media, dp, n) {
+  se <- dp / sqrt(n)
+  ic_inferior <- media - 1.96 * se
+  ic_superior <- media + 1.96 * se
+  return(c(ic_inferior, ic_superior))
+}
+
+# Aplicar a função a todos os dados
+intervalos <- t(apply(dados, 1, function(row) calc_ic(as.numeric(row['Media']), as.numeric(row['DP']), as.numeric(row['N']))))
+
+# Adicionar os intervalos de confiança ao data frame
+dados$IC_Inferior <- intervalos[,1]
+dados$IC_Superior <- intervalos[,2]
+
+Passo 3: Plotar os Dados
+
+# Criar o gráfico
+ggplot(dados, aes(x = reorder(Estudo, Media), y = Media, fill = Grupo)) +
+  geom_bar(stat = "identity", position = position_dodge(width = 0.9), width = 0.7) +
+  geom_errorbar(aes(ymin = IC_Inferior, ymax = IC_Superior), width = 0.2, position = position_dodge(width = 0.9)) +
+  labs(
+    title = "Comparação de Desempenho entre Grupos de Estudos",
+    x = "Estudo",
+    y = "Média do Desempenho"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 10),
+        axis.text.y = element_text(size = 10),
+        plot.title = element_text(hjust = 0.5),
+        legend.position = "top") +
+  coord_flip() +
+  facet_wrap(~ Grupo, scales = "free_y", ncol = 1)
