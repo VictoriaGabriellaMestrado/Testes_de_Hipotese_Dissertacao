@@ -45,10 +45,10 @@ dados <- dados %>%
     upper = media + 1.96 * se
   )
 
-# Definir cores para os grupos
-cores_grupos <- c("Grupo A" = "forestgreen", "Grupo B" = "darkolivegreen3", "Grupo C" = "palegreen")
+# Definir novas cores para os grupos
+cores_grupos <- c("Grupo A" = "royalblue", "Grupo B" = "tomato", "Grupo C" = "goldenrod")
 
-# Criar o gráfico de floresta com customizações
+# Criar o gráfico de floresta com as novas cores
 ggplot(dados, aes(y = reorder(estudo, media), x = media, color = grupo)) +
   geom_point(size = 3) +
   geom_errorbarh(aes(xmin = lower, xmax = upper), height = 0.2) +
@@ -64,9 +64,9 @@ ggplot(dados, aes(y = reorder(estudo, media), x = media, color = grupo)) +
   theme(
     strip.text.y = element_text(angle = 0, face = "bold"),
     panel.spacing = unit(1, "lines"),
-    plot.title = element_text(hjust = 0.5, face = "bold", color = "forestgreen"),
-    axis.title = element_text(face = "bold", color = "forestgreen"),
-    axis.text = element_text(color = "darkgreen"),
-    legend.title = element_text(face = "bold", color = "forestgreen"),
-    legend.text = element_text(color = "darkgreen")
+    plot.title = element_text(hjust = 0.5, face = "bold", color = "royalblue"),
+    axis.title = element_text(face = "bold", color = "royalblue"),
+    axis.text = element_text(color = "navy"),
+    legend.title = element_text(face = "bold", color = "royalblue"),
+    legend.text = element_text(color = "navy")
   )
